@@ -34,9 +34,6 @@ public class Parser {
                 .collect(Collectors.joining("|"));
         String[] tokens = input.split(regex);
         tokens = removeBlank(tokens);
-        for (String s : tokens) {
-            System.out.println(s);
-        }
         return tokens;
     }
 

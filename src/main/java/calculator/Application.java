@@ -11,5 +11,6 @@ public class Application {
         String input = Console.readLine();
         String[] parsedString = Parser.parse(input); //구분자를 통해 나눠진 문자열
         long sum = Stringadder.stringCalculator(parsedString);
+        System.out.println("결과 : " + sum);
     }
 }
