@@ -24,7 +24,7 @@ public class Parser {
         }
         input = input.trim();
         if (input.length() == 0) { //비어있는 경우
-            return new String[]{""};
+            return new String[0];
         }
         if (!Character.isDigit(input.charAt(0))) {
             throw new IllegalArgumentException("잘못된 입력 형식입니다.");
