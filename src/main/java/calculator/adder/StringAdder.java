@@ -1,6 +1,6 @@
 package calculator.adder;
 
-public class Stringadder {
+public class StringAdder {
     public static long stringCalculator(String[] parsedString) {
         long sum = 0;
         for (int i = 0; i < parsedString.length; i++) {

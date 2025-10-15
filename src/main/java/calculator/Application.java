@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.adder.Stringadder;
+import calculator.adder.StringAdder;
 import calculator.parser.Parser;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -14,7 +14,7 @@ public class Application {
             System.out.println("결과 : " + 0);
             return;
         }
-        long sum = Stringadder.stringCalculator(parsedString);
+        long sum = StringAdder.stringCalculator(parsedString);
         System.out.println("결과 : " + sum);
     }
 }
