@@ -1,7 +1,6 @@
 package calculator.parser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -23,6 +22,7 @@ public class Parser {
             delimeters.add(customDelimeter);
             input = input.substring(newLineStartIndex + 2); //입력 문자열 재설정
         }
+        input = input.trim();
         if (input.length() == 0) { //비어있는 경우
             return new String[]{""};
         }
@@ -33,7 +33,17 @@ public class Parser {
                 .map(Pattern::quote) // 특수문자 처리
                 .collect(Collectors.joining("|"));
         String[] tokens = input.split(regex);
-        System.out.println(Arrays.toString(tokens));
+        tokens = removeBlank(tokens);
+        for (String s : tokens) {
+            System.out.println(s);
+        }
+        return tokens;
+    }
+
+    public static String[] removeBlank(String[] tokens) { //빈칸 제거하는 메서드
+        for (int i = 0; i < tokens.length; i++) {
+            tokens[i] = tokens[i].replace(" ", "");
+        }
         return tokens;
     }
 }
