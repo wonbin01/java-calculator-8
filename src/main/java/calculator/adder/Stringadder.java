@@ -10,6 +10,9 @@ public class Stringadder {
                 if (!checker) {
                     throw new IllegalArgumentException("잘못된 숫자가 입력되었습니다");
                 }
+                if (sum > Long.MAX_VALUE - temp) {
+                    throw new IllegalArgumentException("합이 long의 최댓값을 초과했습니다.");
+                }
                 sum += temp;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 분리자가 사용되었습니다.");
