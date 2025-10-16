@@ -3,9 +3,9 @@ package calculator.adder;
 public class StringAdder {
     public static long stringCalculator(String[] parsedString) {
         long sum = 0;
-        for (int i = 0; i < parsedString.length; i++) {
+        for (String longCandidate : parsedString) {
             try {
-                long temp = Long.parseLong(parsedString[i]);
+                long temp = Long.parseLong(longCandidate);
                 boolean checker = longValidator(temp);
                 if (!checker) {
                     throw new IllegalArgumentException("잘못된 숫자가 입력되었습니다");
