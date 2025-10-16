@@ -21,15 +21,19 @@ public class Parser {
         if (isNullString(input)) { //비어있는 문자열인 경우
             return new String[0];
         }
-        if (!Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("잘못된 입력 형식입니다.");
-        }
+        isFirstDigit(input);
         String regex = delimeters.stream()
                 .map(Pattern::quote) // 특수문자 처리
                 .collect(Collectors.joining("|"));
         String[] tokens = input.split(regex);
         tokens = removeBlank(tokens);
         return tokens;
+    }
+
+    private static void isFirstDigit(String input) {
+        if (!Character.isDigit(input.charAt(0))) {
+            throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+        }
     }
 
     private static boolean isNullString(String input) {
