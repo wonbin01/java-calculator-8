@@ -22,12 +22,17 @@ public class Parser {
             return new String[0];
         }
         isFirstDigit(input);
-        String regex = delimeters.stream()
-                .map(Pattern::quote) // 특수문자 처리
-                .collect(Collectors.joining("|"));
+        String regex = createRegex(delimeters);
         String[] tokens = input.split(regex);
         tokens = removeBlank(tokens);
         return tokens;
+    }
+
+    private static String createRegex(List<String> delimeters) {
+        String regex = delimeters.stream()
+                .map(Pattern::quote) // 특수문자 처리
+                .collect(Collectors.joining("|"));
+        return regex;
     }
 
     private static void isFirstDigit(String input) {
