@@ -6,10 +6,7 @@ public class StringAdder {
         for (String longCandidate : parsedString) {
             try {
                 long temp = Long.parseLong(longCandidate);
-                boolean checker = longValidator(temp);
-                if (!checker) {
-                    throw new IllegalArgumentException("잘못된 숫자가 입력되었습니다");
-                }
+                checkPositive(temp);
                 if (sum > Long.MAX_VALUE - temp) {
                     throw new IllegalArgumentException("합이 long의 최댓값을 초과했습니다.");
                 }
@@ -21,10 +18,10 @@ public class StringAdder {
         return sum;
     }
 
-    public static boolean longValidator(long temp) {
-        if (temp <= 0) {
-            return false;
+    private static void checkPositive(long number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("0이하의 숫자가 입력되었습니다.");
         }
-        return true;
     }
+
 }
