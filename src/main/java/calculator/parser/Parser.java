@@ -1,8 +1,8 @@
 package calculator.parser;
 
-import static calculator.Exception.parserException.checkCustomIsOneCharacter;
-import static calculator.Exception.parserException.checkFirstCharacterIsDigit;
-import static calculator.Exception.parserException.extractCustomIndex;
+import static calculator.Exception.ParserException.checkCustomIsOneCharacter;
+import static calculator.Exception.ParserException.checkFirstCharacterIsDigit;
+import static calculator.Exception.ParserException.extractCustomIndex;
 
 import java.util.ArrayList;
 import java.util.List;

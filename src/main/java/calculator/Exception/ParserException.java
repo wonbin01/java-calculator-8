@@ -1,6 +1,6 @@
 package calculator.Exception;
 
-public class parserException {
+public class ParserException {
     public static void checkFirstCharacterIsDigit(String input) {
         if (!Character.isDigit(input.charAt(0))) {
             throw new IllegalArgumentException("잘못된 입력 형식입니다.");
