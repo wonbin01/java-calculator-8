@@ -1,5 +1,9 @@
 package calculator.parser;
 
+import static calculator.Exception.parserException.checkCustomIsOneCharacter;
+import static calculator.Exception.parserException.checkFirstCharacterIsDigit;
+import static calculator.Exception.parserException.extractCustomIndex;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -13,7 +17,7 @@ public class Parser {
         if (hasCustomerDelimeter(input)) { //으로 시작하는 단어 예외 처리
             int lastCustomIndex = extractCustomIndex(input);
             String customDelimeter = input.substring(2, lastCustomIndex); //문자열이 2글자 이상이면 오류
-            isOneCharacter(customDelimeter); // 문자열이 한글자인지 확인하는 메서드
+            checkCustomIsOneCharacter(customDelimeter); // 문자열이 한글자인지 확인하는 메서드
             delimeters.add(customDelimeter);
             input = input.substring(lastCustomIndex + 2); //입력 문자열 재설정
         }
@@ -21,42 +25,20 @@ public class Parser {
         if (isNullString(input)) { //비어있는 문자열인 경우
             return new String[0];
         }
-        isFirstDigit(input);
+        checkFirstCharacterIsDigit(input);
         String regex = createRegex(delimeters);
         String[] tokens = input.split(regex);
-        tokens = removeBlank(tokens);
-        return tokens;
+        return removeBlank(tokens);
     }
 
     private static String createRegex(List<String> delimeters) {
-        String regex = delimeters.stream()
+        return delimeters.stream()
                 .map(Pattern::quote) // 특수문자 처리
                 .collect(Collectors.joining("|"));
-        return regex;
-    }
-
-    private static void isFirstDigit(String input) {
-        if (!Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("잘못된 입력 형식입니다.");
-        }
     }
 
     private static boolean isNullString(String input) {
         return input == null || input.trim().isEmpty();
-    }
-
-    private static int extractCustomIndex(String input) {
-        int newLineStartIndex = input.indexOf("\\n");
-        if (newLineStartIndex == -1) {
-            throw new IllegalArgumentException("잘못된 입력 형식");
-        }
-        return newLineStartIndex;
-    }
-
-    private static void isOneCharacter(String customDelimeter) { //문자열이 한글자가 아니면 오류 발생시키고 종료
-        if (customDelimeter.length() >= 2) {
-            throw new IllegalArgumentException("커스텀 구분자는 한 글자만 가능합니다.");
-        }
     }
 
     private static boolean hasCustomerDelimeter(String input) {
