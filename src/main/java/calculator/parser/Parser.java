@@ -11,14 +11,11 @@ public class Parser {
     public static String[] parse(String input) {
         List<String> delimeters = new ArrayList<>(defaultDelimeters);
         if (hasCustomerDelimeter(input)) { //으로 시작하는 단어 예외 처리
-            int newLineStartIndex = input.indexOf("\\n");
-            if (newLineStartIndex == -1) {
-                throw new IllegalArgumentException("잘못된 입력 형식");
-            }
-            String customDelimeter = input.substring(2, newLineStartIndex); //문자열이 2글자 이상이면 오류
+            int lastCustomIndex = extractCustomIndex(input);
+            String customDelimeter = input.substring(2, lastCustomIndex); //문자열이 2글자 이상이면 오류
             isOneCharacter(customDelimeter); // 문자열이 한글자인지 확인하는 메서드
             delimeters.add(customDelimeter);
-            input = input.substring(newLineStartIndex + 2); //입력 문자열 재설정
+            input = input.substring(lastCustomIndex + 2); //입력 문자열 재설정
         }
         input = input.trim();
         if (input.length() == 0) { //비어있는 경우
@@ -33,6 +30,14 @@ public class Parser {
         String[] tokens = input.split(regex);
         tokens = removeBlank(tokens);
         return tokens;
+    }
+
+    private static int extractCustomIndex(String input) {
+        int newLineStartIndex = input.indexOf("\\n");
+        if (newLineStartIndex == -1) {
+            throw new IllegalArgumentException("잘못된 입력 형식");
+        }
+        return newLineStartIndex;
     }
 
     private static void isOneCharacter(String customDelimeter) { //문자열이 한글자가 아니면 오류 발생시키고 종료
