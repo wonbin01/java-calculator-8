@@ -18,7 +18,7 @@ public class Parser {
             input = input.substring(lastCustomIndex + 2); //입력 문자열 재설정
         }
         input = input.trim();
-        if (input.length() == 0) { //비어있는 경우
+        if (isNullString(input)) { //비어있는 문자열인 경우
             return new String[0];
         }
         if (!Character.isDigit(input.charAt(0))) {
@@ -30,6 +30,10 @@ public class Parser {
         String[] tokens = input.split(regex);
         tokens = removeBlank(tokens);
         return tokens;
+    }
+
+    private static boolean isNullString(String input) {
+        return input == null || input.trim().isEmpty();
     }
 
     private static int extractCustomIndex(String input) {
