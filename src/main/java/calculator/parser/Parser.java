@@ -16,9 +16,7 @@ public class Parser {
                 throw new IllegalArgumentException("잘못된 입력 형식");
             }
             String customDelimeter = input.substring(2, newLineStartIndex); //문자열이 2글자 이상이면 오류
-            if (customDelimeter.length() >= 2) {
-                throw new IllegalArgumentException("커스텀 구분자는 한 글자만 가능합니다.");
-            }
+            isOneCharacter(customDelimeter); // 문자열이 한글자인지 확인하는 메서드
             delimeters.add(customDelimeter);
             input = input.substring(newLineStartIndex + 2); //입력 문자열 재설정
         }
@@ -35,6 +33,12 @@ public class Parser {
         String[] tokens = input.split(regex);
         tokens = removeBlank(tokens);
         return tokens;
+    }
+
+    private static void isOneCharacter(String customDelimeter) { //문자열이 한글자가 아니면 오류 발생시키고 종료
+        if (customDelimeter.length() >= 2) {
+            throw new IllegalArgumentException("커스텀 구분자는 한 글자만 가능합니다.");
+        }
     }
 
     public static String[] removeBlank(String[] tokens) { //빈칸 제거하는 메서드
